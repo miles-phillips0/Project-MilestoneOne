@@ -1,0 +1,31 @@
+html{
+    background-color: lightseagreen;
+}
+body{
+    background-color: darkred;
+    width: 600px;
+    margin: 0 auto;
+    padding: 0 20px 20px 20px;
+    border: 5px solid black;
+}
+h1{
+    color: gold;
+}
+h2{
+    color : black;
+    padding: 0 20px 20px 20px;
+    margin: 0 auto;
+    border: 3px solid black;
+}
+h3{
+    color : blueviolet;
+}
+o1{
+    color : blueviolet;
+}
+img{
+    display: block;
+    margin: 0 auto;
+    filter : drop-shadow(5px 5px 1px black);
+}
+
