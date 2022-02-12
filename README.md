@@ -16,3 +16,7 @@ This is a simple website that uses API calls to dynamically fetch and display mo
 
 # How to use
 other than the listed dependencies, all that is needed to clone and run this website is a TMDB api key that is exported in a .env file
+
+# Possible features to add
+1. link to the movie trailer using a youtube API
+2. custom page styling depending on what movie is loaded
