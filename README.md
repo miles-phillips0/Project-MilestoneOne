@@ -13,3 +13,6 @@ This is a simple website that uses API calls to dynamically fetch and display mo
 # Technical Issues
 1. The MediaWiki API is pretty difficult to use, it took a while to find out how to search directly for pages, google helped me out a lot
 2. Subscripting the MediaWiki response was also a pain, as one key held a list with one element containing a bunch of other keys, I copied the response into an IDE to analyze it and finally figured it out
+
+# How to use
+other than the listed dependencies, all that is needed to clone and run this website is a TMDB api key that is exported in a .env file
