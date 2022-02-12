@@ -10,18 +10,17 @@ app = flask.Flask(__name__)
 def index():
     #list of tmbd move IDS
     movieIDs = [157336, 15040,37165]
-    wikiLinks = ["https://en.wikipedia.org/wiki/Interstellar_(film)/w/api.php", "https://en.wikipedia.org/wiki/Big_Money_Hustlas/w/api.php", "https://en.wikipedia.org/wiki/The_Truman_Show/w/api.php"]
+    movieNames = ["Interstellar_(film)", "Big_Money_Hustlas", "The_Truman_Show"]
 
     #get random movie from list
     RandomNum = random.randint(1,3)
-    ID = movieIDs[RandomNum]
-    link = wikiLinks[RandomNum]
+    ID = movieIDs[RandomNum-1]
+    name = movieNames[RandomNum-1]
 
     load_dotenv(find_dotenv())
     TMDB_KEY = os.getenv("TMDB_KEY")
-    WIKI_KEY = os.getenv("WIKI_KEY")
-    TMDB_URL = "https://api.themoviedb.org/3/movie/" + ID + "?api_key=" + TMDB_KEY + "&language=en-US"
-    #WIKI_URL = #TODO get this
+    TMDB_URL = "https://api.themoviedb.org/3/movie/" + str(ID) + "?api_key=" + str(TMDB_KEY) + "&language=en-US"
+   
 
     #get TMDB
     responseTMDB = requests.get(TMDB_URL)
@@ -31,28 +30,43 @@ def index():
         Title = responseTMDB_json["title"]
         Tagline = responseTMDB_json["tagline"]
         Genres = []
+        ImagePath = "https://www.themoviedb.org/t/p/w500"+ responseTMDB_json["poster_path"]
         for genre in responseTMDB_json["genres"]:
             Genres.append(genre["name"])        
     except KeyError:
         print('TMDB API fail')
     
     #get WIKI Link
-
-    responseWIKI = requests.get(WIKI_URL)
-    responseWIKI_json = responseWIKI.json()
-
-    Wiki_link
-    
+    wikiEndPoint = "https://en.wikipedia.org/w/api.php"
+    wikiParams = {
+    "action" : "query",
+    "titles" : name,
+    "prop"  :   "info",
+    "inprop" : "url",
+    "format" : "json",
+    "formatversion" : "2",
+    "origin" : "*"
+    }
+    result = requests.get(wikiEndPoint, wikiParams)
+    result_json = result.json()
     try:
-        Wiki_link = responseWIKI_json[] #TODO get the link
+        Wiki_Link = result_json["query"]["pages"][0]["fullurl"]
     except KeyError:
         print('WIKI API fail')
     
+    #Big Money Hustlas Doesn't have a tagline
+    if movieNames[RandomNum-1] == "Big_Money_Hustlas":
+        Tagline = "Magnets, How do they work??"
+    
     return flask.render_template(
         "index.html",
-        len = len(TMDB_List)
-        TmdbList = TMDB_List
-        link = Wiki_link
+        title = Title,
+        tagline = Tagline,
+        len = len(Genres),
+        genres = Genres,
+        imagePath = ImagePath
+        wikiLink = Wiki_Link
     )
+
 app.run()
 

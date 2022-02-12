@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/style.css" />
+    </head>
+    <body>
+        <h1>
+            {{title}} 
+        </h1>
+        
+        <h2>
+            {{tagline}}
+        </h2>
+        <h3>
+            Genres
+        </h3>
+        <o1>
+            {%for i in range(0,len)%}
+                <li>
+                    {{genres[i]}}
+                </li>
+            {%endfor%}
+        </o1>
+        <a href={{wikiLink}}>{{wikiLink}}</a>
+        <img src={{imagePath}}>
+
+    </body>
+</html>
